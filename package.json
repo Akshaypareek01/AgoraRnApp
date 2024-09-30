@@ -10,8 +10,18 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.0.0",
+    "agora-react-native-rtm": "^1.5.1",
+    "agora-rn-uikit": "^5.0.2",
+    "axios": "^1.7.7",
+    "buffer": "^6.0.3",
     "react": "18.3.1",
-    "react-native": "0.75.3"
+    "react-native": "0.75.3",
+    "react-native-agora": "^4.4.0",
+    "react-native-base64": "^0.2.1",
+    "react-native-elements": "^3.4.3",
+    "react-native-fs": "^2.20.0",
+    "react-native-vector-icons": "^10.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
