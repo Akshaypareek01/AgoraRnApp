@@ -10,7 +10,6 @@
     "test": "jest"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@react-native-async-storage/async-storage": "^2.0.0",
     "agora-react-native-rtm": "^1.5.1",
     "agora-rn-uikit": "^5.0.2",
@@ -23,10 +22,6 @@
     "react-native-elements": "^3.4.3",
     "react-native-fs": "^2.20.0",
     "react-native-vector-icons": "^10.2.0"
-=======
-    "react": "18.3.1",
-    "react-native": "0.75.3"
->>>>>>> 0a4f3b52c159b039af38d9b53f162abdea01ad8c
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
