@@ -34,7 +34,7 @@ const App = () => {
   const [sid, setsid] = useState('');
   const [msg,setMsg] = useState('');
   const [loading,setLoading] = useState(false);
-  const [isHost, setIsHost] = useState(true); // User role
+  const [isHost, setIsHost] = useState(false); // User role
     const [remoteUid, setRemoteUid] = useState(0); // Uid of the remote user
     const [message, setMessage] = useState(''); // User prompt message
     const [channelName,setChannelName] = useState(null);
@@ -56,6 +56,9 @@ const App = () => {
       token: token ? token : '',
   };
 
+  const toggleHostSwitch = () => {
+    setIsHost(previousState => !previousState);
+  };
 
   const getChannelDetails = async () => {
     try {
@@ -144,10 +147,11 @@ const App = () => {
     try {
         setLoading(true);
         const File = await  getfilename();
-        console.log("File name ===>",File,sid)
+        console.log("File name ===>",File,sid,isHost)
       const response = await axios.post(`${Base_url}api/myData/end-meeting`, {
         sid: sid,
-        fileName:File // Pass the sid in the request body
+        fileName:File,
+        hostStatus:isHost // Pass the sid in the request body
       });
 
       // Handle the response
@@ -470,19 +474,35 @@ const App = () => {
         <AgoraUIKit connectionData={connectionData} rtcCallbacks={callbacks} />
     ) : (
         <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
+            
+            
 
-            <TouchableOpacity style={{padding:15,backgroundColor:"#6EC207",borderRadius:30}}>
-            <Text style={{color:"#fff"}}  onPress={() => {
+
+
+            <TouchableOpacity onPress={() => {
             setVideoCall(true);
             startRecording();
-        }}>Start Call</Text>
+        }} style={{padding:15,backgroundColor:"#6EC207",borderRadius:30}}>
+            <Text style={{color:"#fff"}}  >{isHost ? 'Start Call As Host' : 'Start Call As Client'}</Text>
             </TouchableOpacity>
 
+
+            <View style={{marginTop:20,flexDirection:"row",justifyContent:'center',alignItems:'center'}}>
+                <Text >Are you a Host?</Text>
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isHost ? "#f5dd4b" : "#f4f3f4"}
+        onValueChange={toggleHostSwitch}
+        value={isHost}
+      />
+    
+                </View>
+
             <View style={{marginTop:20,justifyContent:"center",alignItems:"center",padding:10}}>
-            <Text style={{fontSize:14,fontWeight:700}}>Meet response will show here ...</Text>
+            {/* <Text style={{fontSize:14,fontWeight:700}}>Meet response will show here ...</Text> */}
 
             <Text>{
-                loading ? "loading..." : msg
+                loading ? "processing video..." : msg
                }
             </Text>
             </View>
